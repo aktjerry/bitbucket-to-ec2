@@ -475,7 +475,7 @@ If there is any problem while applying then please follow the extended version a
 Following are the list of issues/errors and their fix which I've faced while getting the code deploy to work. This might come in handy. 
 
 |Issue / Error  | Solution |
-|---|---|---|
+|---|---|
 |`wget https://bucket-name.s3.amazonaws.com/latest/install` results in <br />403 Forbidden |Make sure the bucket name in command <br />`wget https://bucket-name.s3.amazonaws.com/latest/install` <br /> is **NOT** your actual S3_Bucket name. It should be like `aws-codedeploy-us-east-2`. <br /> For complete list go to this link - [Resource Kit Bucket Names by Region.](https://docs.aws.amazon.com/codedeploy/latest/userguide/resource-kit.html#resource-kit-bucket-names) 
 |CodeDeploy : Application Stop Fails| If CodeDeploy's Application stop phase always fails regardless of what command you have written in `stop_server.sh` then you can try one of these two : <br /> <br /> 1. Delete everything from this path <br /> `/opt/codedeploy-agent/deployment-root` on your EC2 instance and try to deploy again again.  <br />  <br /> 2. Follow step 1 +  delete your CodeDeploy Application itself and create a new one. New application can have the same name and group name as the deleted one. If new Application has a different name and group, remember to reflect the changes in bitbucket pipeline environment variables| 
 |Unable to Change path  <br /> `cd : /home/ubuntu/helloworld/ not a file of directory`| Add the following in the beginning of your start_server and stop_server scripts <br /><br /> `export NVM_DIR="$HOME/.nvm"` <br />`[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"` <br />`[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"`
