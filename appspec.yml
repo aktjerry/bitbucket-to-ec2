@@ -1,0 +1,16 @@
+
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/helloworld/
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_server.sh
+      runas: root
